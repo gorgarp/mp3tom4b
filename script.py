@@ -66,10 +66,10 @@ def check_ffmpeg_installed():
     except (subprocess.CalledProcessError, FileNotFoundError):
         return False
 
-def convert_mp3_to_m4b(input_mp3, output_m4b):
+def convert_mp3_to_mp4(input_mp3, output_mp4):
     try:
-        ffmpeg.input(input_mp3).output(output_m4b, format='ipod', audio_bitrate='128k', acodec='aac').run(overwrite_output=True)
-        print(f"Successfully converted {input_mp3} to {output_m4b}")
+        ffmpeg.input(input_mp3).output(output_mp4, format='ipod', audio_bitrate='128k', acodec='aac').run(overwrite_output=True)
+        print(f"Successfully converted {input_mp3} to {output_mp4}")
     except ffmpeg.Error as e:
         print(f"Error occurred while converting {input_mp3}: {e.stderr.decode()}")
 
@@ -96,9 +96,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     for mp3_file in mp3_files:
-        m4b_file = os.path.splitext(mp3_file)[0] + '.m4b'
+        mp4_file = os.path.splitext(mp3_file)[0] + '.mp4'
         try:
-            convert_mp3_to_m4b(mp3_file, m4b_file)
+            convert_mp3_to_mp4(mp3_file, mp4_file)
         except Exception as e:
             print(f"An error occurred while processing {mp3_file}: {str(e)}")
 
